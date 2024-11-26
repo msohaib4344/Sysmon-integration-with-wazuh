@@ -116,15 +116,26 @@ Logging only necessary events helps conserve system resources and makes it easie
 
 Sysmon64.exe -accepteula -i sysconfig.xml
 
-![2024-10-28 01_52_25-Greenshot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/c1520e01-2ee1-47c1-b2ea-0b2b122548ee/2024-10-28_01_52_25-Greenshot.png)
+<img width="960" alt="2024-10-28 01_52_25-Greenshot" src="https://github.com/user-attachments/assets/dd2a868b-f2fd-41a4-ae93-5b85faaa9837">
 
-![2024-10-28 03_01_17-Select Administrator_ Command Prompt.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/7d62739b-0a09-4e73-9578-22b097490218/2024-10-28_03_01_17-Select_Administrator__Command_Prompt.png)
+Command to check the file location: dir
 
-![2024-10-28 03_06_50-Greenshot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/13d09e5d-96c5-4dcf-899b-5729a491dc7b/2024-10-28_03_06_50-Greenshot.png)
+<img width="826" alt="2" src="https://github.com/user-attachments/assets/00e5271f-4c74-4586-b7e4-f2986ab390a4">
 
-![2024-10-28 03_10_43-Sysmon - File Explorer.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/95c37e5d-ba60-421c-806f-c8e897904070/2024-10-28_03_10_43-Sysmon_-_File_Explorer.png)
+You might encounter this error
 
-![2024-10-28 03_15_38-ChatGPT.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/9b86d54d-1aa4-4943-b3f2-7a5426cb440e/2024-10-28_03_15_38-ChatGPT.png)
+
+<img width="826" alt="2" src="https://github.com/user-attachments/assets/4ac88251-0bbe-42ec-a905-b0d355056f41">
+
+You need to go to notepad++ or any other software for your convenience. 
+Change the version in you case it miight be different.
+
+<img width="960" alt="4" src="https://github.com/user-attachments/assets/c8f2e723-d86e-445e-86ad-076635a2f50a">
+
+Now let's check if it working. 
+execute command: Sysmon64.exe -accepteula -i sysconfig.xml
+<img width="590" alt="5" src="https://github.com/user-attachments/assets/7bf92eae-ad59-4cb8-a44a-a529bf648a7f">
+
 
 ### Testing the Configuration
 
@@ -137,9 +148,14 @@ To verify that Sysmon is functioning correctly with the new configuration, follo
 Applications and Services Logs/Microsoft/Windows/Sysmon/Operational
 ```
 
-![2024-10-28 03_24_05-Greenshot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/43170fa2-cdba-425b-9883-dfd83869c142/2024-10-28_03_24_05-Greenshot.png)
+<img width="590" alt="5" src="https://github.com/user-attachments/assets/f4df35c8-dc0b-4f35-91fb-45064a7b8011">
 
-![2024-10-28 03_34_52-Event Properties - Event 1, Sysmon.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/846f0794-647c-4b9e-94d1-307fdd0182ad/2024-10-28_03_34_52-Event_Properties_-_Event_1_Sysmon.png)
+
+Now you have execute some commands like powershell.exe to test sysmon working: 
+If you will follow the given the path you will see this log beacuse we just executed the command of powershell.exe
+
+<img width="470" alt="7" src="https://github.com/user-attachments/assets/188d40aa-7ebb-47d1-b252-f2e3b1211681">
+
 
 # **Configure Wazuh agent to monitor Sysmon events**
 
@@ -167,9 +183,16 @@ We assume the Wazuh agent is installed and running in the computer being monitor
 - **Description**: The rule includes a description to clarify the nature of the detected event, helping in incident response.
 - **Implementation**: The script needs to be added to the Wazuh agent's `ossec.conf` file, followed by a restart of the agent for the changes to take effect.
 
-![2024-10-28 03_51_17-_ossec.conf - Notepad.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/21e0a554-1ed4-472c-a9f7-59f82cec4d94/2024-10-28_03_51_17-_ossec.conf_-_Notepad.png)
+  Here you will put config file:
 
-![2024-10-28 03_52_38-Greenshot.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/b3284966-9df9-4dbc-8bf6-12491e9f7ce9/2024-10-28_03_52_38-Greenshot.png)
+![8](https://github.com/user-attachments/assets/73b367b8-08c4-4eb5-a7ed-5270c394d998)
+
+
+Go to servies of your computer and Navigate to services
+Then Restart your wazuh agent:
+
+<img width="960" alt="9" src="https://github.com/user-attachments/assets/f5f1be46-d9bd-4800-9bed-c91639f13cf8">
+
 
 # **Configure Wazuh manager**
 
@@ -200,7 +223,9 @@ A new rule needs to be added to `local_rules.xml` in the Wazuh manager to matc
 - **Customization**: This rule acts as a "child" rule of the existing Sysmon ruleset provided by Wazuh, allowing for tailored monitoring of PowerShell-related events.
 - **Implementation**: To activate the rule, it must be added to the `local_rules.xml` file in the Wazuh manager, followed by a restart of the manager for the changes to take effect.
 
-![2024-10-28 04_01_20-ossec-agent - File Explorer.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/fd0a6500-68d4-428e-abbc-97fc1ea04747/2024-10-28_04_01_20-ossec-agent_-_File_Explorer.png)
+  Here is overview of this configuration:
+
+<img width="960" alt="9" src="https://github.com/user-attachments/assets/445c0d57-35b6-424d-9d91-98e419ac810c">
 
 ### Restarted the Wazuh manager.
 
@@ -221,8 +246,8 @@ A new rule needs to be added to `local_rules.xml` in the Wazuh manager to matc
 This setup allows security teams to monitor Windows systems in real-time through Wazuh, using logs generated by Sysmon.
 
 
+![11](https://github.com/user-attachments/assets/fa06e3ed-b9c9-469e-9495-e8feca3efcd7)
 
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/ccc38c6e-bef6-44e3-b920-e249b9b73519/image.png)
+![12](https://github.com/user-attachments/assets/d6a29488-7d2f-452a-872d-dc895e43b0d9)
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/db1ccdd4-a606-4ae0-bf53-7550ca60e3af/d5d3c3e6-a39b-46f5-a12e-b3814fabad87/image.png)
